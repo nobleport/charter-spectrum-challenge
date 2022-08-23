@@ -1,43 +1,56 @@
 const {Client, Pool} = require('pg');
-const showsArray = require('./shows.json');
-const packagesArray = require('./packages.json');
+
 
 const client = new Client({
     host: 'localhost',
     user: 'postgres',
     port: 5432,
-    password: 'rootUser',
-    database: 'postgres'
-}
-)
-
-const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'testbb',
-    password: 'demopassword',
-    port: 5432
+    password: 'password',
+    database: 'cinema'
 })
 
-pool.query("DROP TABLE shows", (err, res)=>{
-    console.log(err, res, "line 23")
-    pool.end(()=>{})
-})
+// const insertshow = async (title, network_id, rating)=> {
+//     try {
+//         await client.connect();
+//         await client.query(
+//             `INSERT INTO "shows" ("title", "network_id", "rating")
+//             VALUES ($1, $2)`, [title, network_id, rating]);
+//             return true;
+//     } catch(error) {
+//         console.error(error.stack);
+//         return false
+//     } finally {
+//         await client.end()
+//     }
+// }
 
-pool.query("DROP TABLE packages", (err, res)=>{
-    console.log(err, res, 'line 28')
-    pool.end(()=>{})
-})
+// const insertPackage = async (packageName, network_ids, price) => {
+//     try {
+//         await client.connect();
+//         await client.query(
+//             `INSERT INTO "shows" ("packageName", "network_ids", "price")
+//             VALUES ($1, $2, $3)`, [packageName, network_ids, price]);
+//             return true;
+//     } catch(error) {
+//         console.error(error.stack);
+//         return false
+//     } finally {
+//         await client.end()
+//     }
+// }
 
-pool.query("CREATE TABLE shows (id INT, title VARCHAR(20), network VARCHAR(20), imdbRating NUMBERIC(3, 1))", (err, res) => {
-    console.log(err, res, 'line 33')
-    pool.end(()=>{})
-})
-
-pool.query("CREATE TABLE packages (id INT, name VARCHAR(20), networks text[])", (err, res)=> {
-    console.log(err, res, 'line 38')
-    pool.end(()=>{})
-})
-
-console.log(showsArray, 'shows array');
+// const insertNetwork = async (name)=> {
+//     try {
+//         await client.connect();
+//         await client.query(
+//             `INSERT INTO "shows" ("name")
+//             VALUES ($1)`, [name]);
+//             return true;
+//     } catch(error) {
+//         console.error(error.stack);
+//         return false
+//     } finally {
+//         await client.end()
+//     }
+// }
 
